@@ -8,29 +8,20 @@ use App\Controller\AppController;
 //コントローラーのプログラム部分(実際に動作する部分)
 class HelloController extends AppController {
     public $autoRender = false;
+    private $data = [
+        ['name'=>'taro', 'mail'=>'taro@yamada','tel'=>'090-999-999'],
+        ['name'=>'hanako', 'mail'=>'hanako@flower','tel'=>'080-888-888'],
+        ['name'=>'sachiko', 'mail'=>'sachico@happy','tel'=>'070-777-777'],
+    ];
 
     public function index() {
-        //古いバージョン（cakePHP3 Ver3.5）での書き方
-        // $id = $this->request->query['id'];
-        // $pass = $this -> request -> query['pass'];
 
-        //CakePHP4での書き方
-        $id = 'no name';
+        $id = 0;
 
-        //テキストP58の書き方だとcakePHP4ではエラーになるので
-        //下記の書き方で修正
         if(null !== $this->request->getQuery('id')){
             $id = $this->request->getQuery('id');
         }
-
-        $pass = 'no passward';
-        if(null !== $this->request->getQuery('pass')){
-            $pass = $this->request->getQuery('pass');
-        }
-
-        echo "<html><body><h1>Hello!</h1>";
-        echo '<ul><li>your id:'. $id .'</li>';
-        echo '<li>password: '. $pass .'</li></ul>';
-        echo "</body></html>";
+        //引数の値をJSON形式のテキストに変換して表示する。
+        echo json_encode($this->data[$id]);
     }
 }
