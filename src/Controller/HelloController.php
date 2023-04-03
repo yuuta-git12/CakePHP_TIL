@@ -24,7 +24,23 @@ class HelloController extends AppController {
             'message4' => 'メッセージ4',
         ];
         $this->set($values);
+    }
 
+    public function form(){
+        $this->viewBuilder()->disableAutoLayout();
+        $name = $this->request->getData('name');
+        $mail = $this->request->getData('mail');
+        $age  = $this->request->getData('age');
 
+        //cakephp4では使えない書き方
+        // $name = $this->request->data['name'];
+        // $mail = $this->request->data['mail'];
+        // $age  = $this->request->data['age'];
+        $res = 'こんにちは'.$name.'('.$age.')さん。メールアドレスは、'.$mail.'ですね？';
+        $values = [
+            'title' => 'Result',
+            'message' => $res
+        ];
+        $this->set($values);
     }
 }

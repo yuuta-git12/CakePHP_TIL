@@ -18,6 +18,24 @@
         <p><?= $message2 ?></p>
         <p><?= $message3 ?></p>
         <p><?= $message4 ?></p>
+        <table>
+            <form method="post" action="/mycakephp/hello/form">
+            <?=$this->Form->create(null,['url'=>['controller'=>'Hello','action'=>'form'],'type'=>'post'])?>
+            <tr><th>name</th>
+                <td><?=$this->Form->input('name')?></td>
+            </tr>
+            <tr><th>mail</th>
+                <td><?=$this->Form->input('mail')?></td>
+            </tr>
+            <tr><th>age</th>
+                <td><?=$this->Form->input('age')?></td>
+            </tr>
+            <tr><th></th>
+                <td><?=$this->Form->submit('Click')?></td>
+            </tr>
+            <?=$this->Form->end()?>
+
+        </table>
     </div>
 </body>
 </html>
