@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title><?= $title ?></title>
+        <?php echo $this->Html->css('form-radio');?>
         <style>
             h1 {font-size: 48pt;
                     margin: 0px 0px 10px 0px; padding: 0px 20px;color: whitte;
@@ -36,6 +38,38 @@
             <?=$this->Form->end()?>
 
         </table>
+    </div>
+    <br>
+    <div class="radiobox">
+
+        <?php
+            //Formの作成
+            echo $this->Form->create();
+
+            //radioボタンの作成
+            echo $this->Form->radio('radio', [
+                ['text' => '男性','class'=>'radiobutton'],
+                ['text' => '女性','class'=>'radiobutton'],
+                ]);
+
+                echo $this->Form->radio(
+                    'favorite_color',
+                    [
+                        ['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
+                        ['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
+                        ['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
+                    ]
+                );
+
+
+            //フォームの終了
+            echo $this->Form->end();
+        ?>
+        <br>
+        <input id="radio1" class="radiobutton" name="hoge" type="radio" value="ラジオボタン1" />
+            <label for="radio1">男性</label>
+        <input id="radio2" class="radiobutton" name="hoge" type="radio" value="ラジオボタン2" />
+            <label for="radio2">女性</label>
     </div>
 </body>
 </html>

@@ -1,0 +1,15 @@
+/* https://dezanari.com/css-radiobutton-button/ */
+.radiobutton {
+    display: none;
+  }
+  label {
+    background-color: white;
+    padding: 10px 20px;
+    border:solid;
+    border-color: black;
+  }
+  .radiobutton:checked + label {
+    /* background-color: pink; */
+    background-color: #ffffe0;
+    opacity: 1;
+  }
