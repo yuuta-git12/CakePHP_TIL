@@ -11,19 +11,30 @@ class HelloController extends AppController {
     public function index() {
         // Ver3.4で非推奨　Ver4.0で削除されている
         // $this->viewBuilder()->autoLayout(false);
-
+        $value = [];
         //最新版での書き方は以下
         $this->viewBuilder()->disableAutoLayout();
         $this->set('title','Hello!');
-        $this->set('message','This is message!');
-
+        // $this->set('message','This is message!');
+        $value = ['one'=>1,
+                'two'=>2,
+                'three'=>3,
+                'four'=>4,
+                'five'=>5,
+                'six'=>6];
+        $this->set('select_value',$value);
+        if($this->request->isPost()){   //POST送信をしていればTrueしていない場合はFalse
+            $this->set('data',$this->request->getdata('Form1'));
+        }else{
+            $this->set('data',[]);
+        }
         //配列を使って値を受け渡す書き方
-        $values = [
-            'message2' => 'メッセージ2',
-            'message3' => 'メッセージ3',
-            'message4' => 'メッセージ4',
-        ];
-        $this->set($values);
+        // $values = [
+        //     'message2' => 'メッセージ2',
+        //     'message3' => 'メッセージ3',
+        //     'message4' => 'メッセージ4',
+        // ];
+        // $this->set('data',$values);
     }
 
     public function form(){

@@ -16,25 +16,46 @@
         <h1><?= $title ?></h1>
     </header>
     <div class="row">
-        <p><?= $message ?></p>
-        <p><?= $message2 ?></p>
-        <p><?= $message3 ?></p>
-        <p><?= $message4 ?></p>
+        <pre><?php print_r($data);?><pre>
+    </div>
+    <div class="row">
         <table>
-            <form method="post" action="/mycakephp/hello/form">
-            <?=$this->Form->create(null,['url'=>['controller'=>'Hello','action'=>'form'],'type'=>'post'])?>
+            <?=$this->Form->create(null,    //<form>タグの生成はcreateメソッドで行う。create([モデル],[連想配列]);
+                ['type'=>'post',
+                'url'=>['controller'=>'Hello',
+                    'action'=>'index']])?>
+
             <tr><th>name</th>
-                <td><?=$this->Form->input('name')?></td>
+                <td><?=$this->Form->text('Form1.name')?></td>
             </tr>
             <tr><th>mail</th>
-                <td><?=$this->Form->input('mail')?></td>
+                <td><?=$this->Form->text('Form1.mail')?></td>
             </tr>
             <tr><th>age</th>
-                <td><?=$this->Form->input('age')?></td>
+                <td><?=$this->Form->text('Form1.age')?></td>
             </tr>
             <tr><th></th>
-                <td><?=$this->Form->submit('Click')?></td>
+                <td><?=$this->Form->submit('送信')?></td>
             </tr>
+            <tr><th>CheckBox</th>
+                <td><?=$this->Form->checkbox('Form1.check',['id'=>'check1'])?>
+                    <?=$this->Form->label('check1','check box')?></td>
+            </tr>
+            <tr><th>RadioBox</th>
+                <td><?=$this->Form->radio('Form1.radio',[
+                    ['text'=>'male','value'=>'男性','checked'=>'true'],
+                    ['text'=>'female','value'=>'女性']
+                    ])?></td>
+            </tr>
+            <br>
+            <br>
+            <tr><th>SelectBox</th>
+                <td><?=$this->Form->select('Form1.select',[
+                    $select_value
+                ],['multiple'=>true,'size'=>6])?></td>    <!--multiple:trueで選択ボックスで複数選択が可能になる。-->
+            </tr>
+
+
             <?=$this->Form->end()?>
 
         </table>
