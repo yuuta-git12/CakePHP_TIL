@@ -16,5 +16,7 @@
     <div class="row">
         <p><?= h($message) ?></p>
     </div>
+    <pre><?php print_r($test);?><pre>
+    <p><?= h($test['name']) ?></p>
 </body>
 </html>
