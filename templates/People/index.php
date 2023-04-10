@@ -1,6 +1,6 @@
 <p>This is People table records.</p>
 <!-- <pre><?php print_r($data);?></pre>  Queryオブジェクトの中身を確認 -->
-<pre><?php print_r($data->toArray()); ?></pre>
+<!-- <pre><?php print_r($data->toArray()); ?></pre> -->
 <table>
 <thead><tr>
     <th>id</th><th>name</th><th>mail</th><th>age</th>
