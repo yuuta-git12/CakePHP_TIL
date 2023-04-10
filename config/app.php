@@ -169,14 +169,14 @@ return [
      *   The conventional location for custom renderers is in `src/Error`. Your exception renderer needs to
      *   implement the `render()` method and return either a string or Http\Response.
      *   `errorRenderer` - string - The class responsible for rendering PHP errors. The selected
-     *   class will be used for both web and CLI contexts. If you want different classes for each environment 
+     *   class will be used for both web and CLI contexts. If you want different classes for each environment
      *   you'll need to write that conditional logic as well. Error renderers need to
      *   to implement the `Cake\Error\ErrorRendererInterface`.
      * - `skipLog` - array - List of exceptions to skip for logging. Exceptions that
      *   extend one of the listed exceptions will also be skipped for logging.
      *   E.g.:
      *   `'skipLog' => ['Cake\Http\Exception\NotFoundException', 'Cake\Http\Exception\UnauthorizedException']`
-     * - `extraFatalErrorMemory` - int - The number of megabytes to increase the memory limit by 
+     * - `extraFatalErrorMemory` - int - The number of megabytes to increase the memory limit by
      *   when a fatal error is encountered. This allows
      *   breathing room to complete logging or error handling.
      * - `ignoredDeprecationPaths` - array - A list of glob compatible file paths that deprecations
@@ -292,10 +292,22 @@ return [
          * Environment variable based configurations can be loaded here or
          * in app_local.php depending on the applications needs.
          */
+        //アプリケーションが通常使う設定
         'default' => [
-            'className' => Connection::class,
-            'driver' => Mysql::class,
+            //DBの接続に用いるクラスの指定
+            // 'className' => Connection::class,
+            'className' => 'Cake\Database\Connection',
+
+            //MySQL用のドライバークラスの設定
+            // 'driver' => Mysql::class,
+            'driver' => 'Cake\Database\Driver\Mysql',
+            //持続的接続機能に関する設定
             'persistent' => false,
+            'host' => 'localhost',
+            'username' => 'root',
+            'password' => '',
+            'database' => 'mydata', //アクセスするデータベース名
+            'encoding' => 'utf8',
             'timezone' => 'UTC',
 
             /*
@@ -309,7 +321,7 @@ return [
              * For e.g. `'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4']`
              */
             'flags' => [],
-            'cacheMetadata' => true,
+            'cacheMetadata' => true, //メタデータをキャッシュするための設定
             'log' => false,
 
             /*
@@ -335,6 +347,7 @@ return [
         /*
          * The test connection is used during the test suite.
          */
+        //テスト時に使われる設定
         'test' => [
             'className' => Connection::class,
             'driver' => Mysql::class,
