@@ -5,7 +5,7 @@
 <?= $this->Form->create($entity,
     ['type'=>'post',
     'url'=>['controller'=>'People',
-            'action'=>'create']]) ?>
+            'action'=>'create']]) ?>    <!--フォームの値はcreateアクションに渡される-->
 
 <div>name</div>
 <div><?=$this->Form->text('People.name') ?></div>
