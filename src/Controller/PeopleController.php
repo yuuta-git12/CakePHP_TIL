@@ -47,4 +47,32 @@ class PeopleController extends AppController{
         //この場合、indexに移動
         return $this->redirect(['action'=>'index']);
     }
+
+    public function edit(){
+        $id = $this->request->getQuery('id');
+        $entity = $this->People->get($id);
+        $this->set('entity',$entity);
+    }
+
+    public function update(){
+        if($this->request->is('post')){
+
+            //①edit画面から送信されたフォームの値を取り出す
+            $data = $this->request->getData('People');
+
+            //②フォームの値のidの値を使い、編集するエンティティを取り出す
+            //テーブルクラスのgetメソッドを対象のidのエンティティを取り出す。
+            $entity = $this->People->get($data['id']);
+
+            //③フォームの値($data)でエンティティを更新する
+            //テーブルクラスの「pathchEntity」メソッドを使用
+            //第一引数のエンティティの内容を第二引数の値で更新する。
+            $this->People->patchEntity($entity,$data);
+
+            //④テーブルクラスのsaveメソッドを使い、エンティティを保存
+            //これでエンティティの内容がDBテーブルに送られ、レコードの値が変更される。
+            $this->People->save($entity);
+        }
+        return $this->redirect(['action'=>'index']);
+    }
 }

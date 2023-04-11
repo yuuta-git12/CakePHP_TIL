@@ -9,8 +9,8 @@
 <tr>
     <td><?=h($obj->id) ?></td>
     <!-- editアクションへのリンクを追加 -->
-    <td><a href="<$this->Url->build(['controller'=>'People',
-    'action'=>'edit']);? >? id=<?=$obj->id ?>">
+    <td><a href="<?=$this->Url->build(['controller'=>'People',
+    'action'=>'edit']); ?>?id=<?=$obj->id ?>">
         <?=h($obj->name) ?></td>
     <td><?=h($obj->mail) ?></td>
     <td><?=h($obj->age) ?></td>
