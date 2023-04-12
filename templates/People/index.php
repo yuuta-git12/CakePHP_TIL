@@ -14,6 +14,9 @@
         <?=h($obj->name) ?></td>
     <td><?=h($obj->mail) ?></td>
     <td><?=h($obj->age) ?></td>
+    <!-- deleteアクションへのリンクを追加 -->
+    <td><a href="<?=$this->Url->build(['controller'=>'People',
+    'action'=>'delete']); ?>?id=<?=$obj->id ?>">delete</a><td>
 </tr>
 <?php endforeach; ?>
 </table>

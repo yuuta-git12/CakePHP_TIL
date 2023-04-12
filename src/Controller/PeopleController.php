@@ -75,4 +75,27 @@ class PeopleController extends AppController{
         }
         return $this->redirect(['action'=>'index']);
     }
+
+    public function delete(){
+        $id = $this->request->getQuery('id');
+        $entity = $this->People->get($id);
+        $this->set('entity',$entity);
+    }
+
+    public function destroy(){
+        if($this->request->is('post')){
+            //①delete画面から送信されたフォームの値を変数$dataに取り出す
+            $data = $this->request->getData('People');
+
+            //②フォームの値のidの値を使い、編集するエンティティを取り出す
+            //テーブルクラスのgetメソッドを対象のidのエンティティを取り出す。
+            $entity = $this->People->get($data['id']);
+
+            //③テーブルクラスの「delete」でエンティティを削除する。
+            //引数に指定したエンティティを削除するメソッド。
+            //エンティティに対応するDBテーブル内のレコードが削除される。
+            $this->People->delete($entity);
+        }
+        return $this->redirect(['action'=>'index']);
+    }
 }
