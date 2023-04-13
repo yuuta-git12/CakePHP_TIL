@@ -9,7 +9,23 @@ class PeopleController extends AppController{
         //PeopleControllerはPeopleモデルを扱うコントローラーなので、
         //テーブルと同じ名前ここではPeopleTableクラスのインスタンスが「People」という名前のプロパティと
         //して組み込まれている。
-        $data = $this->People->find('all');
+
+        if($this->request->is('post')){
+            //POST送信時の処理
+
+            //index.phpのフォーム'People.find'の値を変数に取り出し
+            $find = $this->request->getData('People.find');
+
+            //'conditions'を使って、nameの値が$findであるものかチェックする
+            //「検索する項目名と、検索する値を連想配列にしたもの([項目名=>値])を用意すれば
+            //その条件に合うものを検索できる。」
+            $condition = ['conditions'=>['name'=>$find]];
+            $data = $this->People->find('all',$condition);
+        }else{
+            //GET時の処理
+            $data = $this->People->find('all');
+        }
+
 
         //PeopleTableのsetDisplayFieldで指定した項目の値を取り出している
         //ここではnameの値

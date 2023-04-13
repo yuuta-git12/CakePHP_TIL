@@ -1,6 +1,15 @@
 <p>This is People table records.</p>
 <!-- <pre><?php print_r($data);?></pre>  Queryオブジェクトの中身を確認 -->
 <!-- <pre><?php print_r($data->toArray()); ?></pre> -->
+<?=$this->Form->create(null,
+    ['type' =>'post',
+    'url' =>['controller'=>'People','action'=>'index']])?>
+<div>検索</div>
+<div><?=$this->Form->text('People.find')?></div>
+<div><?=$this->Form->submit('検索')?></div>
+<?=$this->Form->end()?>
+
+<hr>    <!--水平線を引くためのタグ-->
 <table>
 <thead><tr>
     <th>id</th><th>name</th><th>mail</th><th>age</th>
