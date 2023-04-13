@@ -19,11 +19,44 @@ class PeopleController extends AppController{
             //'conditions'を使って、nameの値が$findであるものかチェックする
             //「検索する項目名と、検索する値を連想配列にしたもの([項目名=>値])を用意すれば
             //その条件に合うものを検索できる。」
-            $condition = ['conditions'=>['name'=>$find]];
+
+            //完全一致の名前検索を行う場合の設定
+            // $condition = ['conditions'=>['name'=>$find]];
+
+            //名前のあいまい検索を行う場合の設定
+            // $condition = ['conditions'=>['name like'=>$find]];
+
+            //決まった年齢以下の人だけ検索する。
+            // $condition = ['conditions'=>['age <='=>$find]];
+
+            //年齢の範囲を決めて検索する。
+            // $arr = explode(',',$find);  //第一引数の値で第二引数の値を切り離す関数
+            // $condition = ['conditions'=>[
+            //     'and'=>[
+            //         'age >=' => $arr[0],
+            //         'age <=' => $arr[1]
+            //     ]]];
+
+            //name項目かmail項目で検索する設定
+            // $condition = ['conditions'=>[
+            //     'or'=>[
+            //         'name like' => $find,
+            //         'mail like' => $find
+            //     ]]];
+
+            //年齢に並び順をつけて検索する設定
+            // $condition = [
+            //     'conditions'=>['name like'=>$find],
+            //     'order' =>['People.age'=>'desc']
+            // ];
+
+            //取り出すレコード数を設定
+            $condition = ['limit' => 3, 'page'=>intval($find)];
             $data = $this->People->find('all',$condition);
         }else{
             //GET時の処理
-            $data = $this->People->find('all');
+            // $data = $this->People->find('all');
+            $data = $this->People->find('all',['order' =>['People.age'=>'asc']]);
         }
 
 
