@@ -50,10 +50,22 @@ class PeopleController extends AppController{
     }
 
     public function add(){
+        $msg = 'please type your personal data...';
         //古い書き方
         // $entity = $this->People->newEntity();
         //新しい書き方
         $entity = $this->People->newEmptyEntity();
+
+        if($this->request->is('post')){
+            $data = $this->request->getData('People');
+            $entity = $this->People->newEntity($data);
+            if($this->People->save($entity)){   //エンティティが保存されたらtrue、それ以外はfalseを返す
+                return $this->redirect(['action'=>'index']);
+            }
+            //保存されなかった場合に表示されるエラーメッセージ
+            $msg = 'Error was occurd...';
+        }
+        $this->set('msg',$msg);
         $this->set('entity',$entity);
     }
 

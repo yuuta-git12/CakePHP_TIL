@@ -2,6 +2,9 @@
 namespace App\Model\Table;  //テーブルクラスを配置する名前空間
 use Cake\ORM\Table;
 use Cake\ORM\Query; //Queryクラスを使用するための宣言
+//バリデーションを使用するための宣言
+use Cake\ORM\RulesChecker;
+use Cake\Validation\Validator;
 
 class PeopleTable extends Table {    //クラス名はテーブル名と同じ、最初だけ大文字、あとは小文字
 
@@ -26,5 +29,30 @@ class PeopleTable extends Table {    //クラス名はテーブル名と同じ�
 
     public function findByAge(Query $query,array $options){
         return $query->order(['age'=>'asc'])->order(['name'=>'asc']);
+    }
+
+    public function validationDefault(Validator $validator) : Validator{
+        $validator
+            ->integer('id') //値が整数値か確認
+            ->allowEmpty('id','create');
+
+        $validator
+            ->scalar('name')    //値がテキストなどか確認
+            ->requirePresence('name','create') //必須項目、createはレコードの新規作成を意味する。
+            ->notEmpty('name');
+
+        $validator
+            ->scalar('mail')
+            ->allowEmpty('mail')
+            ->email('mail');//メールアドレスのチェック
+
+        $validator
+            ->integer('age')
+            ->requirePresence('age','create')
+            ->notEmpty('age')
+            ->greaterThan('age',-1);//指定の値より大きいかどうかチェック
+
+        return $validator;
+
     }
 }
